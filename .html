@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cronômetro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #timer-display {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+<div id="timer-display">24:00</div>
+<button id="start-timer">Quantanium</button>
+
+<script>
+  let countdown;
+  const display = document.getElementById('timer-display');
+  const startButton = document.getElementById('start-timer');
+
+  function startCountdown(duration) {
+    clearInterval(countdown);
+    let time = duration;
+
+    countdown = setInterval(() => {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+
+      display.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+      if (time <= 0) {
+        clearInterval(countdown);
+        display.textContent = "BUMMMMMM !";
+      } else {
+        time--;
+      }
+    }, 1000);
+  }
+
+  startButton.addEventListener('click', () => {
+    startCountdown(24 * 60);
+  });
+</script>
+</body>
+</html>
